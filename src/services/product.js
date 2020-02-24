@@ -6,5 +6,8 @@ export default {
     },
     insertProductCart: (data) => {
         return $http.post('cart/add', data)
+    },
+    getCartProductList() {
+        return $http.get('cart');
     }
 }

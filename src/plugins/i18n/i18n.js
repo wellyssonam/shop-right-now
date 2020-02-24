@@ -24,6 +24,13 @@ export const i18n = new VueI18n({
                             addProductCart: 'Product was added to the cart.',
                         }
                     }
+                },
+                shoppingList: {
+                    warning: {
+                        error: {},
+                        success: {},
+                        emptyCart: 'Empty Cart.',
+                    }
                 }
             }
         },
@@ -43,6 +50,13 @@ export const i18n = new VueI18n({
                         success: {
                             addProductCart: 'Produto foi adicionado ao carrinho.',
                         }
+                    }
+                },
+                shoppingList: {
+                    warning: {
+                        error: {},
+                        success: {},
+                        emptyCart: 'Carrinho encontra-se vazio.',
                     }
                 }
             }
