@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <NavBar />
+    <router-view />
+    <footer>{{ $t('app.name') }}</footer>
   </div>
 </template>
+
+<script>
+import NavBar from './components/template/NavBar'
+export default {
+  components: { NavBar },
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -18,15 +23,14 @@
 }
 
 #nav {
-  padding: 30px;
+  padding-bottom: 20px;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+footer {
+  background: #69c05b;
+  padding: 10px 0px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>
