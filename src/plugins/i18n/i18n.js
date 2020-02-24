@@ -15,8 +15,14 @@ export const i18n = new VueI18n({
                     cart: 'Cart',
                 },
                 product: {
-                    error: {
-                        productList: 'Erro ao listar produtos.'
+                    warning: {
+                        error: {
+                            productList: 'Erro ao listar produtos.',
+                            addProductCart: 'Error adding product to cart.',
+                        },
+                        success: {
+                            addProductCart: 'Product was added to the cart.',
+                        }
                     }
                 }
             }
@@ -29,8 +35,14 @@ export const i18n = new VueI18n({
                     cart: 'Carrinho',
                 },
                 product: {
-                    error: {
-                        productList: 'Erro ao listar produtos.'
+                    warning: {
+                        error: {
+                            productList: 'Erro ao listar produtos.',
+                            addProductCart: 'Erro ao adicionar produto ao carrinho.',
+                        },
+                        success: {
+                            addProductCart: 'Produto foi adicionado ao carrinho.',
+                        }
                     }
                 }
             }

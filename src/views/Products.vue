@@ -17,7 +17,7 @@ export default {
   mounted() {
     ProductService.list()
       .then(response => (this.products = response.data))
-      .catch(() => console.log(this.$t('app.product.error.productList')))
+      .catch(() => console.log(this.$t('app.product.warning.error.productList')))
   },
 }
 </script>

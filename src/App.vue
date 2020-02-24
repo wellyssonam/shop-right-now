@@ -31,14 +31,15 @@ export default {
 }
 
 footer {
-      background: #69c05b;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  background: #69c05b;
+  border-top: 5px solid #679d5e;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 </style>

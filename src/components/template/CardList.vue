@@ -2,7 +2,7 @@
   <div class="card-list">
     <b-row>
       <Card
-        :products="product"
+        :product="product"
         v-for="(product, index) in products"
         :key="index"
       />
