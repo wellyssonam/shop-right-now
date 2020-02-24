@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <NavBar />
-    <router-view />
+    <header>
+      <NavBar />
+    </header>
+    <b-container>
+      <router-view />
+    </b-container>
     <footer>{{ $t('app.name') }}</footer>
   </div>
 </template>
 
 <script>
 import NavBar from './components/template/NavBar'
+
 export default {
   components: { NavBar },
 }
@@ -20,17 +25,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding-bottom: 20px;
+  .container {
+    padding: 20px 20px 60px 20px;
+  }
 }
 
 footer {
-  background: #69c05b;
-  padding: 10px 0px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+      background: #69c05b;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 </style>

@@ -13,6 +13,11 @@ export const i18n = new VueI18n({
                 navbar: {
                     products: 'Products',
                     cart: 'Cart',
+                },
+                product: {
+                    error: {
+                        productList: 'Erro ao listar produtos.'
+                    }
                 }
             }
         },
@@ -22,6 +27,11 @@ export const i18n = new VueI18n({
                 navbar: {
                     products: 'Produtos',
                     cart: 'Carrinho',
+                },
+                product: {
+                    error: {
+                        productList: 'Erro ao listar produtos.'
+                    }
                 }
             }
         }
