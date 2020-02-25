@@ -5,12 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
   },
-  mutations: {
+  getters: {
+    totalAmountCart(state) {
+      return state.products
+        .map(p => p.product.price * p.quantity)
+        .reduce((total, atual) => total + atual, 0)
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
+  mutations: {},
+  actions: {},
+  modules: {},
 })

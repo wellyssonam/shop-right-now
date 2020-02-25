@@ -15,7 +15,7 @@
             <b-col md="12">
               <div class="price">
                 <span class="text">Total</span>
-                <span class="value">R$ </span>
+                <span class="value">{{ getTotalAmountCart }}</span>
               </div>
             </b-col>
           </b-row>
@@ -44,6 +44,11 @@ export default {
   data: () => ({
     productList: [],
   }),
+  computed: {
+      getTotalAmountCart() {
+          return this.$store.getters.totalAmountCart
+      }
+  },
   props: {
     products: {
       type: Array,
