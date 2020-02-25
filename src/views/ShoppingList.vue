@@ -17,13 +17,20 @@ export default {
   components: {
     CardList,
   },
-  data: () => ({
-    productList: [],
-  }),
+  computed: {
+    productList() {
+      return this.$store.state.products
+    }
+  },
+  methods: {
+    getCartProductListSuccess(items) {
+      this.$store.state.products = items;
+    }
+  },
   mounted() {
     ProductService.getCartProductList()
-      .then(response => (this.productList = response.data.items))
-      .catch(() => console.log('Erro ao listar produtos do carrinho.'))
+      .then(response => this.getCartProductListSuccess(response.data.items))
+      .catch(() => console.log(this.$t('app.shoppingList.warning.error.listCartProducts')))
   },
 }
 </script>

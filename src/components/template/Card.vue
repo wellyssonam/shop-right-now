@@ -99,18 +99,36 @@ export default {
         quantity: this.quantity,
         sku: this.product.sku,
       })
-        .then(() =>
-          console.log(this.$t('app.product.warning.success.addProductCart'))
-        )
+        .then(() => this.addProductCartSuccess())
         .catch(() =>
           console.log(this.$t('app.product.warning.error.addProductCart'))
         )
+    },
+    addProductCartSuccess() {
+			const productFound = this.searchProductCart(this.product.sku)
+      if (productFound.length && productFound[0].quantity === this.quantity) {
+				console.log(this.$t('app.product.warning.success.productAlreadyAdded'))
+      } else if (productFound.length && productFound[0].quantity !== this.quantity) {
+				this.$store.state.products.forEach(data => {
+          data.quantity = this.quantity
+				})
+				console.log(this.$t('app.product.warning.success.updatedCartProduct'))
+			} else {
+        this.$store.state.products.push({
+          product: this.product,
+          quantity: this.quantity,
+        })
+				console.log(this.$t('app.product.warning.success.productAddedCart'))
+			}
     },
     addQuantity() {
       this.quantity++
     },
     deductQuantity() {
       this.quantity--
+    },
+    searchProductCart(sku) {
+      return this.$store.state.products.filter(data => data.product.sku === sku)
     },
   },
 }

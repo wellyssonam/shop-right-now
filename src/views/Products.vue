@@ -7,6 +7,7 @@
 <script>
 import ProductService from '../services/product'
 import CardList from '@/components/template/CardList'
+import axios from 'axios'
 
 // const productService = new ProductService();
 export default {
@@ -14,10 +15,19 @@ export default {
   data: () => ({
     products: [],
   }),
+  methods: {
+    fetchProducts(products, items) {
+      this.products = products;
+      this.$store.state.products = items
+    }
+  },
   mounted() {
-    ProductService.list()
-      .then(response => (this.products = response.data))
-      .catch(() => console.log(this.$t('app.product.warning.error.productList')))
+    axios
+      .all([ProductService.list(), ProductService.getCartProductList()])
+      .then(response => this.fetchProducts(response[0].data, response[1].data.items))
+      .catch(() =>
+        console.log(this.$t('app.product.warning.error.productList'))
+      )
   },
 }
 </script>

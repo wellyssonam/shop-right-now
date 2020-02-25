@@ -67,16 +67,19 @@ export default {
   methods: {
     removeProductCart(sku) {
       ProductService.removeProductCart(sku)
-        .then(() =>
-          console.log(
-            this.$t('app.shoppingList.warning.success.removeProductCart')
-          )
-        )
+        .then(() => this.removeProductCartSuccess())
         .catch(() =>
           console.log(
             this.$t('app.shoppingList.warning.error.removeProductCart')
           )
         )
+    },
+    removeProductCartSuccess() {
+      this.$store.state.products = this.removeProduct(this.product.product.sku)
+      console.log(this.$t('app.shoppingList.warning.success.removeProductCart'))
+    },
+    removeProduct(sku) {
+      return this.$store.state.products.filter(data => data.product.sku !== sku)
     },
   },
 }

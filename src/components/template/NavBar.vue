@@ -21,7 +21,7 @@
         <router-link to="/shopping-list" right active-class="active">
           <b-button variant="dark">
             {{ $t('app.navbar.cart') }}
-            <b-badge variant="warning">4</b-badge>
+            <b-badge variant="warning">{{ quantityProductsCart }}</b-badge>
           </b-button>
         </router-link>
       </b-navbar-nav>
@@ -32,6 +32,11 @@
 <script>
 export default {
   name: 'NavBar',
+  computed: {
+    quantityProductsCart() {
+      return this.$store.state.products.length
+    },
+  },
 }
 </script>
 
