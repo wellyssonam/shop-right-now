@@ -39,7 +39,17 @@ export const i18n = new VueI18n({
                         },
                         emptyCart: 'Empty Cart.',
                     }
-                }
+                },
+                card: {
+                    warning: {
+                        error: {
+                        },
+                        success: {
+                        },
+                        latestUnits: 'Latest Units',
+                        outOfStock: 'Out of Stock',
+                    }
+                },
             }
         },
         pt: {
@@ -74,7 +84,17 @@ export const i18n = new VueI18n({
                         },
                         emptyCart: 'Carrinho encontra-se vazio.',
                     }
-                }
+                },
+                card: {
+                    warning: {
+                        error: {
+                        },
+                        success: {
+                        },
+                        latestUnits: 'Últimas Unidades',
+                        outOfStock: 'Sem Estoque',
+                    }
+                },
             }
         }
     }
