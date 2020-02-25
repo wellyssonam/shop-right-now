@@ -46,7 +46,7 @@
           <b-list-group>
             <b-list-group-item class="middle-content">
               <div class="quantity">
-                <div class="text">Quantity:</div>
+                <div class="text">{{ $t('app.card.quantity') }}</div>
                 <div class="value-buttons-content">
                   <span class="value">{{ quantity }}</span>
                   <b-button
@@ -76,7 +76,7 @@
               </div>
 
               <div class="available">
-                <div class="text">Available:</div>
+                <div class="text">{{ $t('app.card.available') }}</div>
                 <div class="value">
                   {{ product.quantityAvailable }}
                   <span
@@ -100,12 +100,12 @@
               </div>
 
               <div class="price">
-                <div class="text">Price:</div>
+                <div class="text">{{ $t('app.card.price') }}</div>
                 <div class="value">{{ product.price | currency }}</div>
               </div>
 
               <div class="amount">
-                <div class="text">Amount:</div>
+                <div class="text">{{ $t('app.card.amount') }}</div>
                 <div class="value">
                   {{ (product.price * quantity) | currency }}
                 </div>
@@ -118,8 +118,9 @@
               variant="primary"
               :disabled="product.quantityAvailable === 0"
               @click="addProductCart()"
-              >Adicionar</b-button
             >
+              {{ $t('app.buttons.add') }}
+            </b-button>
           </b-card-body>
         </div>
       </b-card>
@@ -253,6 +254,9 @@ export default {
       }
       &.footer {
         background: #343a40;
+        .btn {
+          width: 150px;
+        }
       }
     }
     .list-group {

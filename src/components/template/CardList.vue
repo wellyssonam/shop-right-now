@@ -14,7 +14,7 @@
           <b-row>
             <b-col md="12">
               <div class="price">
-                <span class="text">Total</span>
+                <span class="text">{{ $t('app.card.amount') }}</span>
                 <span class="value">{{ getTotalAmountCart }}</span>
               </div>
             </b-col>
@@ -45,9 +45,9 @@ export default {
     productList: [],
   }),
   computed: {
-      getTotalAmountCart() {
-          return this.$store.getters.totalAmountCart
-      }
+    getTotalAmountCart() {
+      return this.$store.getters.totalAmountCart
+    },
   },
   props: {
     products: {

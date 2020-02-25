@@ -6,24 +6,34 @@
       <b-navbar-brand>{{ $t('app.name') }}</b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
-        <router-link
-          type="button"
-          to="/"
-          right
-          active-class="active"
-          exact
-          class="menu-item-product"
-        >
+        <router-link type="button" to="/" right active-class="active" exact>
           <b-button variant="dark">
             {{ $t('app.navbar.products') }}
           </b-button>
         </router-link>
-        <router-link to="/shopping-list" right active-class="active">
+        <router-link
+          to="/shopping-list"
+          right
+          active-class="active"
+          class="menu-item-cart"
+        >
           <b-button variant="dark">
             {{ $t('app.navbar.cart') }}
             <b-badge variant="warning">{{ quantityProductsCart }}</b-badge>
           </b-button>
         </router-link>
+        <b-button-group class="idiom">
+          <b-dropdown right :text="$t('app.navbar.idioms')" variant="dark">
+            <b-dropdown-item
+              v-for="(idiom, index) in idioms"
+              :key="index"
+              @click="changeIdiom(idiom.alias)"
+            >
+              <img :src="idiom.img" alt="" width="29px" height="20px" />
+              <span>{{ idiom.name }}</span>
+            </b-dropdown-item>
+          </b-dropdown>
+        </b-button-group>
       </b-navbar-nav>
     </b-navbar>
   </div>
@@ -36,6 +46,28 @@ export default {
     quantityProductsCart() {
       return this.$store.state.products.length
     },
+  },
+  data: () => ({
+    idioms: [],
+  }),
+  methods: {
+    changeIdiom(idiom) {
+      this.$i18n.locale = idiom
+    },
+  },
+  mounted() {
+    this.idioms = [
+      {
+        name: this.$t('app.navbar.portuguese'),
+        img: require('@/assets/flag-brazil.png'),
+        alias: 'pt',
+      },
+      {
+        name: this.$t('app.navbar.english'),
+        img: require('@/assets/flag-usa.png'),
+        alias: 'en',
+      },
+    ]
   },
 }
 </script>
@@ -51,8 +83,18 @@ export default {
       color: #fffafa;
       font-weight: bold;
     }
-    .menu-item-product {
-      margin-right: 10px;
+    .menu-item-cart,
+    .idiom {
+      margin-left: 10px;
+      position: relative;
+      .dropdown-item {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        img {
+          margin-right: 10px;
+        }
+      }
     }
     .badge {
       padding: 5px 2px;
@@ -63,8 +105,8 @@ export default {
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      top: 5px;
-      right: 13px;
+      top: -5px;
+      right: -5px;
       position: absolute;
     }
   }

@@ -13,6 +13,10 @@ export const i18n = new VueI18n({
                 navbar: {
                     products: 'Products',
                     cart: 'Cart',
+                    idioms: 'Idioms',
+                },
+                buttons: {
+                    add: 'Add',
                 },
                 product: {
                     warning: {
@@ -41,6 +45,13 @@ export const i18n = new VueI18n({
                     }
                 },
                 card: {
+                    quantity: 'Quantity',
+                    available: 'Available',
+                    price: 'Price',
+                    amount: 'Amount',
+                    sku: 'SKU',
+                    category: 'Category',
+                    maker: 'Maker',
                     warning: {
                         error: {
                         },
@@ -58,6 +69,12 @@ export const i18n = new VueI18n({
                 navbar: {
                     products: 'Produtos',
                     cart: 'Carrinho',
+                    idioms: 'Idiomas',
+                    portuguese: 'Português',
+                    english: 'Inglês',
+                },
+                buttons: {
+                    add: 'Adicionar',
                 },
                 product: {
                     warning: {
@@ -86,6 +103,13 @@ export const i18n = new VueI18n({
                     }
                 },
                 card: {
+                    quantity: 'Quantidade',
+                    available: 'Disponível',
+                    price: 'Preço',
+                    amount: 'Total',
+                    sku: 'SKU',
+                    category: 'Categoria',
+                    maker: 'Fabricante',
                     warning: {
                         error: {
                         },

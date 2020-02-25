@@ -11,20 +11,20 @@
         <b-row>
           <b-col md="5">
             <div>{{ product.product.name }}</div>
-            <div>SKU: {{ product.product.sku }}</div>
-            <div>Categoria: {{ product.product.category }}</div>
-            <div>Fabricante: {{ product.product.maker }}</div>
+            <div>{{ $t('app.card.sku') }}: {{ product.product.sku }}</div>
+            <div>{{ $t('app.card.category') }}: {{ product.product.category }}</div>
+            <div>{{ $t('app.card.maker') }}: {{ product.product.maker }}</div>
           </b-col>
 
           <b-col md="5">
-            <div>Disponível: {{ product.product.quantityAvailable }}</div>
-            <div>Quantidade: {{ product.quantity }}</div>
+            <div>{{ $t('app.card.available') }}: {{ product.product.quantityAvailable }}</div>
+            <div>{{ $t('app.card.quantity') }}: {{ product.quantity }}</div>
             <div>
-              Price:
+              {{ $t('app.card.price') }}:
               <span class="price">{{ product.product.price | currency }}</span>
             </div>
             <div>
-              Total:
+              {{ $t('app.card.amount') }}:
               <span class="price">
                 {{
                   (product.quantity * product.product.price) | currency
