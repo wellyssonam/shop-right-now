@@ -1,11 +1,14 @@
 <template>
   <div class="card-list">
     <div v-if="landscape">
-      <CardLandscape
-        :product="product"
-        :key="index"
-        v-for="(product, index) in products"
-      />
+      <transition-group tag="div" enter-active-class="animated fadeInUp" appear duration="{ enter: 4000 }">
+        <CardLandscape
+          :product="product"
+          :key="`teste-${index}`"
+          v-for="(product, index) in products"
+        />
+      </transition-group>
+
       <b-card class="card-list-landscape">
         <b-container fluid>
           <b-row>
@@ -87,7 +90,6 @@ export default {
 }
 
 @media (max-width: 576px) {
-  
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
