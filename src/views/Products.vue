@@ -1,6 +1,6 @@
 <template>
   <div class="srn-products">
-    <CardList :products="products"/>
+    <CardList :products="products" />
   </div>
 </template>
 

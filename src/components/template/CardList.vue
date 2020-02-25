@@ -1,20 +1,43 @@
 <template>
   <div class="card-list">
-    <b-row>
-      <Card
+    <div v-if="landscape">
+      <CardLandscape
         :product="product"
-        v-for="(product, index) in products"
         :key="index"
+        v-for="(product, index) in products"
       />
-    </b-row>
+      <b-card class="card-list-landscape">
+        <b-container fluid>
+          <b-row>
+            <b-col md="12">
+              <div class="price">
+                <span class="text">Total</span>
+                <span class="value">R$ </span>
+              </div>
+            </b-col>
+          </b-row>
+        </b-container>
+      </b-card>
+    </div>
+    <div v-else>
+      <b-row>
+        <Card
+          :product="product"
+          :indexItem="index"
+          :key="index"
+          v-for="(product, index) in products"
+        />
+      </b-row>
+    </div>
   </div>
 </template>
 
 <script>
 import Card from './Card'
+import CardLandscape from './CardLandscape'
 
 export default {
-  components: { Card },
+  components: { Card, CardLandscape },
   data: () => ({
     productList: [],
   }),
@@ -23,8 +46,62 @@ export default {
       type: Array,
       default: () => [],
     },
+    landscape: {
+      type: Boolean,
+      default: () => false,
+    },
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.card-list-landscape {
+  display: flex;
+  height: auto;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: right;
+  flex-direction: row;
+  border-left: 7px solid #498a3e;
+  .card-body {
+    padding: 0px;
+  }
+  .container-fluid {
+    border-left: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 15px 0px;
+    .row {
+      margin-left: 0px;
+      margin-right: 0px;
+      .price {
+        font-size: 24px;
+        font-weight: bold;
+        .text {
+          margin-right: 10px;
+        }
+        .value {
+          color: #69c05b;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 769px) and (max-width: 992px) {
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 993px) and (max-width: 1200px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1201px) {
+}
+</style>

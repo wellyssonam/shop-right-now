@@ -27,8 +27,12 @@ export const i18n = new VueI18n({
                 },
                 shoppingList: {
                     warning: {
-                        error: {},
-                        success: {},
+                        error: {
+                            removeProductCart: 'Error removing product from cart.',
+                        },
+                        success: {
+                            removeProductCart: 'Product removed from cart.',
+                        },
                         emptyCart: 'Empty Cart.',
                     }
                 }
@@ -54,8 +58,12 @@ export const i18n = new VueI18n({
                 },
                 shoppingList: {
                     warning: {
-                        error: {},
-                        success: {},
+                        error: {
+                            removeProductCart: 'Erro ao remover produto(s) do carrinho.',
+                        },
+                        success: {
+                            removeProductCart: 'Produto(s) removido(s) com sucesso.',
+                        },
                         emptyCart: 'Carrinho encontra-se vazio.',
                     }
                 }

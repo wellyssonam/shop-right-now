@@ -118,7 +118,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 .srn-card {
   max-width: 100%;
   margin: 0px auto 20px auto;
@@ -136,7 +136,7 @@ export default {
         justify-content: center;
       }
       &.footer {
-          background: #343a40;
+        background: #343a40;
       }
     }
     .list-group {
@@ -199,36 +199,44 @@ export default {
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
-  .card-body {
-    &.content {
-      height: 100px;
+  .srn-card {
+    .card-body {
+      &.content {
+        height: 100px;
+      }
     }
   }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 769px) and (max-width: 992px) {
-  .card-body {
-    &.content {
-      height: 100px;
+  .srn-card {
+    .card-body {
+      &.content {
+        height: 100px;
+      }
     }
   }
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 993px) and (max-width: 1200px) {
-  .card-body {
-    &.content {
-      height: 90px;
+  .srn-card {
+    .card-body {
+      &.content {
+        height: 90px;
+      }
     }
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1201px) {
-  .card-body {
-    &.content {
-      height: 65px;
+  .srn-card {
+    .card-body {
+      &.content {
+        height: 65px;
+      }
     }
   }
 }

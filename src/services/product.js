@@ -7,7 +7,10 @@ export default {
     insertProductCart: (data) => {
         return $http.post('cart/add', data)
     },
-    getCartProductList() {
+    getCartProductList: () => {
         return $http.get('cart');
+    },
+    removeProductCart: (sku) => {
+        return $http.delete(`cart/remove/${sku}`)
     }
 }
