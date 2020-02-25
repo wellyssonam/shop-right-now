@@ -1,7 +1,7 @@
 <template>
   <div class="card-list">
     <div v-if="landscape">
-      <transition-group tag="div" enter-active-class="animated fadeInUp" appear duration="{ enter: 4000 }">
+      <transition-group tag="div" enter-active-class="animated fadeInUp" appear>
         <CardLandscape
           :product="product"
           :key="`teste-${index}`"

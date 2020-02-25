@@ -50,15 +50,13 @@
 
             <div class="price">
               <div class="text">Price:</div>
-              <div class="value">
-                R$ {{ parseFloat(product.price).toFixed(2) }}
-              </div>
+              <div class="value">{{ product.price | currency }}</div>
             </div>
 
             <div class="amount">
               <div class="text">Amount:</div>
               <div class="value">
-                R$ {{ parseFloat(product.price * quantity).toFixed(2) }}
+                {{ (product.price * quantity) | currency }}
               </div>
             </div>
           </b-list-group-item>

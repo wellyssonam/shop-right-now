@@ -14,6 +14,10 @@ Vue.use(BootstrapVue);
 
 Vue.use(IconsPlugin)
 
+Vue.filter('currency', value => {
+  return `R$ ${parseFloat(value).toFixed(2).replace('.', ',')}`
+})
+
 Vue.config.productionTip = false
 
 new Vue({

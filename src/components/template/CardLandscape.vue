@@ -21,16 +21,13 @@
             <div>Quantidade: {{ product.quantity }}</div>
             <div>
               Price:
-              <span class="price"
-                >R$ {{ parseToFloat(product.product.price) }}</span
-              >
+              <span class="price">{{ product.product.price | currency }}</span>
             </div>
             <div>
               Total:
               <span class="price">
-                R$
                 {{
-                  parseToFloat(product.quantity * product.product.price)
+                  (product.quantity * product.product.price) | currency
                 }}</span
               >
             </div>
@@ -80,9 +77,6 @@ export default {
             this.$t('app.shoppingList.warning.error.removeProductCart')
           )
         )
-    },
-    parseToFloat(value) {
-      return parseFloat(value).toFixed(2)
     },
   },
 }
