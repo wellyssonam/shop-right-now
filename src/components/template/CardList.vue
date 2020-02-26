@@ -15,7 +15,7 @@
             <b-col md="12">
               <div class="price">
                 <span class="text">{{ $t('app.card.amount') }}</span>
-                <span class="value">{{ getTotalAmountCart }}</span>
+                <span class="value">{{ totalAmountCart | currency }}</span>
               </div>
             </b-col>
           </b-row>
@@ -38,17 +38,16 @@
 <script>
 import Card from './Card'
 import CardLandscape from './CardLandscape'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { Card, CardLandscape },
   data: () => ({
-    productList: [],
+		productList: [],
   }),
-  computed: {
-    getTotalAmountCart() {
-      return this.$store.getters.totalAmountCart
-    },
-  },
+	computed: {
+		...mapGetters(['totalAmountCart']),
+	},
   props: {
     products: {
       type: Array,

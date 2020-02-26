@@ -116,10 +116,11 @@
           <b-card-body class="footer">
             <b-button
               variant="primary"
-              :disabled="product.quantityAvailable === 0"
+              :disabled="product.quantityAvailable === 0 || buttonLoading"
               @click="addProductCart()"
             >
-              {{ $t('app.buttons.add') }}
+              <b-spinner small v-if="buttonLoading"></b-spinner>
+              <span v-else>{{ $t('app.buttons.add') }}</span>
             </b-button>
           </b-card-body>
         </div>
@@ -130,6 +131,7 @@
 
 <script>
 import ProductService from '@/services/product'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -149,36 +151,53 @@ export default {
   data: () => ({
     quantity: 1,
     warningMessageHeight: 0,
+    buttonLoading: false,
   }),
   methods: {
+    ...mapActions(['addProduct', 'callAlertSuccess', 'callAlertError']),
+    ...mapGetters(['getCartProductList']),
     addProductCart() {
+      this.buttonLoading = true
       ProductService.insertProductCart({
         quantity: this.quantity,
         sku: this.product.sku,
       })
         .then(() => this.addProductCartSuccess())
         .catch(() =>
-          console.log(this.$t('app.product.warning.error.addProductCart'))
+          this.callAlertError({
+            message: this.$t('app.product.warning.error.addProductCart'),
+            time: 3000,
+          })
         )
+        .finally(() => (this.buttonLoading = false))
     },
     addProductCartSuccess() {
       const productFound = this.searchProductCart(this.product.sku)
       if (productFound.length && productFound[0].quantity === this.quantity) {
-        console.log(this.$t('app.product.warning.success.productAlreadyAdded'))
+        this.callAlertError({
+          message: this.$t('app.product.warning.success.productAlreadyAdded'),
+          time: 5000,
+        })
       } else if (
         productFound.length &&
         productFound[0].quantity !== this.quantity
       ) {
-        this.$store.state.products.forEach(data => {
+        this.getCartProductList().forEach(data => {
           data.quantity = this.quantity
         })
-        console.log(this.$t('app.product.warning.success.updatedCartProduct'))
+        this.callAlertSuccess({
+          message: this.$t('app.product.warning.success.updatedCartProduct'),
+          time: 3000,
+        })
       } else {
-        this.$store.state.products.push({
+        this.addProduct({
           product: this.product,
           quantity: this.quantity,
         })
-        console.log(this.$t('app.product.warning.success.productAddedCart'))
+        this.callAlertSuccess({
+          message: this.$t('app.product.warning.success.productAddedCart'),
+          time: 3000,
+        })
       }
     },
     showWarningMessage() {
@@ -193,7 +212,7 @@ export default {
       this.quantity--
     },
     searchProductCart(sku) {
-      return this.$store.state.products.filter(data => data.product.sku === sku)
+      return this.getCartProductList().filter(data => data.product.sku === sku)
     },
   },
 }

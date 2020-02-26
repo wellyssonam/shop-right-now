@@ -12,6 +12,7 @@
 <script>
 import CardList from '@/components/template/CardList'
 import ProductService from '../services/product'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -19,18 +20,30 @@ export default {
   },
   computed: {
     productList() {
-      return this.$store.state.products
-    }
+      return this.getCartProductList()
+    },
   },
   methods: {
+    ...mapActions(['callAlertError']),
+    ...mapMutations(['updateCartProductList', 'setPageLoading']),
+    ...mapGetters(['getCartProductList']),
     getCartProductListSuccess(items) {
-      this.$store.state.products = items;
-    }
+      this.updateCartProductList(items)
+    },
+    getCartProductListError() {
+      this.updateCartProductList([])
+      this.callAlertError({
+        message: this.$t('app.shoppingList.warning.error.listCartProducts'),
+        time: 3000,
+      })
+    },
   },
   mounted() {
+    this.setPageLoading(true)
     ProductService.getCartProductList()
       .then(response => this.getCartProductListSuccess(response.data.items))
-      .catch(() => console.log(this.$t('app.shoppingList.warning.error.listCartProducts')))
+      .catch(() => this.getCartProductListError())
+      .finally(() => this.setPageLoading(false))
   },
 }
 </script>

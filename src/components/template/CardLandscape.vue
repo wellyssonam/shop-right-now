@@ -12,12 +12,17 @@
           <b-col md="5">
             <div>{{ product.product.name }}</div>
             <div>{{ $t('app.card.sku') }}: {{ product.product.sku }}</div>
-            <div>{{ $t('app.card.category') }}: {{ product.product.category }}</div>
+            <div>
+              {{ $t('app.card.category') }}: {{ product.product.category }}
+            </div>
             <div>{{ $t('app.card.maker') }}: {{ product.product.maker }}</div>
           </b-col>
 
           <b-col md="5">
-            <div>{{ $t('app.card.available') }}: {{ product.product.quantityAvailable }}</div>
+            <div>
+              {{ $t('app.card.available') }}:
+              {{ product.product.quantityAvailable }}
+            </div>
             <div>{{ $t('app.card.quantity') }}: {{ product.quantity }}</div>
             <div>
               {{ $t('app.card.price') }}:
@@ -35,7 +40,9 @@
 
           <b-col md="2">
             <div class="icon-trash">
+              <b-spinner small v-if="buttonLoading"></b-spinner>
               <b-icon
+                v-else
                 icon="Trash"
                 aria-hidden="true"
                 :variant="colorTrash"
@@ -53,6 +60,7 @@
 
 <script>
 import ProductService from '@/services/product'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -63,23 +71,36 @@ export default {
   data: () => ({
     quantity: 1,
     colorTrash: 'secondary',
+    buttonLoading: false,
   }),
   methods: {
+    ...mapActions(['callAlertSuccess', 'callAlertError']),
+    ...mapGetters(['getCartProductList']),
+    ...mapMutations(['updateCartProductList']),
     removeProductCart(sku) {
+      this.buttonLoading = true
       ProductService.removeProductCart(sku)
         .then(() => this.removeProductCartSuccess())
         .catch(() =>
-          console.log(
-            this.$t('app.shoppingList.warning.error.removeProductCart')
-          )
+          this.callAlertError({
+            message: this.$t(
+              'app.shoppingList.warning.error.removeProductCart'
+            ),
+            time: 3000,
+          })
         )
+        .finally(() => (this.buttonLoading = false))
     },
     removeProductCartSuccess() {
-      this.$store.state.products = this.removeProduct(this.product.product.sku)
-      console.log(this.$t('app.shoppingList.warning.success.removeProductCart'))
+      const productList = this.removeProduct(this.product.product.sku)
+      this.updateCartProductList(productList)
+      this.callAlertSuccess({
+        message: this.$t('app.shoppingList.warning.success.removeProductCart'),
+        time: 3000,
+      })
     },
     removeProduct(sku) {
-      return this.$store.state.products.filter(data => data.product.sku !== sku)
+      return this.getCartProductList().filter(data => data.product.sku !== sku)
     },
   },
 }
