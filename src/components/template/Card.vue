@@ -45,6 +45,21 @@
 
           <b-list-group>
             <b-list-group-item class="middle-content">
+							<div class="sku">
+                <div class="text">{{ $t('app.card.sku') }}</div>
+                <div class="value">{{ product.sku }}</div>
+              </div>
+
+							<div class="category">
+                <div class="text">{{ $t('app.card.category') }}</div>
+                <div class="value">{{ product.category }}</div>
+              </div>
+
+							<div class="maker">
+                <div class="text">{{ $t('app.card.maker') }}</div>
+                <div class="value">{{ product.maker }}</div>
+              </div>
+
               <div class="quantity">
                 <div class="text">{{ $t('app.card.quantity') }}</div>
                 <div class="value-buttons-content">
@@ -172,17 +187,17 @@ export default {
         .finally(() => (this.buttonLoading = false))
     },
     addProductCartSuccess() {
-      const productFound = this.searchProductCart(this.product.sku)
+			const productFound = this.searchProductCart(this.product.sku)
+			console.log(productFound)
       if (productFound.length) {
         this.callAlertError({
           message: this.$t('app.product.warning.success.productAlreadyAdded'),
           time: 5000,
         })
       } else {
-        this.addProduct({
-          product: this.product,
-          quantity: this.quantity,
-        })
+        if (!this.productNotFoundCart(this.product.sku).length) {
+          this.addProduct({ product: this.product, quantity: this.quantity })
+        }
         this.callAlertSuccess({
           message: this.$t('app.product.warning.success.productAddedCart'),
           time: 3000,
@@ -204,6 +219,9 @@ export default {
       return this.getCartProductList().filter(
         data => data.product.sku === sku && data.quantity === this.quantity
       )
+    },
+    productNotFoundCart(sku) {
+      return this.getCartProductList().filter(data => data.product.sku === sku)
     },
   },
 }
@@ -253,7 +271,7 @@ export default {
   .card {
     max-width: unset !important;
     .card-body {
-      padding: 10px;
+      padding: 10px 15%;
       border-radius: 5px;
       &.content {
         width: 100%;
@@ -265,12 +283,12 @@ export default {
       &.footer {
         background: #343a40;
         .btn {
-          width: 150px;
+          width: 100%;
         }
       }
     }
     .list-group {
-      font-size: 18px;
+      font-size: 16px;
     }
     .card-img-top {
       width: 90%;
@@ -281,6 +299,9 @@ export default {
       border-radius: 0px;
       background: #f4f4f4a1;
       .price,
+      .sku,
+      .category,
+      .maker,
       .amount,
       .available {
         font-weight: bold;

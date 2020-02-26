@@ -11,6 +11,10 @@ export default new Vuex.Store({
       variantColor: 'primary',
       showAlert: false,
     },
+    menu: {
+      showProducts: false,
+      showMCart: false,
+    },
     pageLoading: false,
   },
   getters: {

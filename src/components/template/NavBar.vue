@@ -7,7 +7,14 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <router-link type="button" to="/" right active-class="active" exact>
+          <router-link
+            type="button"
+            to="/"
+            right
+            active-class="active"
+            exact
+            v-if="mmenuItems.showProducts"
+          >
             <b-button variant="dark">
               {{ $t('app.navbar.products') }}
             </b-button>
@@ -17,6 +24,7 @@
             right
             active-class="active"
             class="menu-item-cart"
+            v-if="mmenuItems.showCart"
           >
             <b-button variant="dark">
               {{ $t('app.navbar.cart') }}
@@ -47,6 +55,9 @@ export default {
   computed: {
     quantityProductsCart() {
       return this.$store.state.products.length
+    },
+    mmenuItems() {
+      return this.$store.state.menu
     },
   },
   data: () => ({

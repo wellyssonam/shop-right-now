@@ -39,6 +39,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.state.menu = { showProducts: true, showCart: false }
     this.setPageLoading(true)
     ProductService.getCartProductList()
       .then(response => this.getCartProductListSuccess(response.data.items))

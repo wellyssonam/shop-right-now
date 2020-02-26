@@ -25,6 +25,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.state.menu = { showProducts: false, showCart: true }
     this.setPageLoading(true)
     axios
       .all([ProductService.list(), ProductService.getCartProductList()])
