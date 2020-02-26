@@ -173,21 +173,10 @@ export default {
     },
     addProductCartSuccess() {
       const productFound = this.searchProductCart(this.product.sku)
-      if (productFound.length && productFound[0].quantity === this.quantity) {
+      if (productFound.length) {
         this.callAlertError({
           message: this.$t('app.product.warning.success.productAlreadyAdded'),
           time: 5000,
-        })
-      } else if (
-        productFound.length &&
-        productFound[0].quantity !== this.quantity
-      ) {
-        this.getCartProductList().forEach(data => {
-          data.quantity = this.quantity
-        })
-        this.callAlertSuccess({
-          message: this.$t('app.product.warning.success.updatedCartProduct'),
-          time: 3000,
         })
       } else {
         this.addProduct({
@@ -212,7 +201,9 @@ export default {
       this.quantity--
     },
     searchProductCart(sku) {
-      return this.getCartProductList().filter(data => data.product.sku === sku)
+      return this.getCartProductList().filter(
+        data => data.product.sku === sku && data.quantity === this.quantity
+      )
     },
   },
 }
