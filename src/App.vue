@@ -10,7 +10,8 @@
     <Alert
       :message="alert.message"
       :variantColor="alert.variantColor"
-      :showAlert="alert.showAlert"
+      :showAlert="true"
+      :class="{ display: alert.showAlert }"
     />
     <div class="background-spinner" v-if="isPageLoading">
       <b-spinner variant="success" label="Text Centered"></b-spinner>
@@ -43,7 +44,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   .container {
-    padding: 20px 20px 60px 20px;
+    padding: 90px 20px 60px 20px;
   }
   .background-spinner {
     position: fixed;
@@ -75,11 +76,21 @@ footer {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
-
-.alert {
-  position: fixed;
-  bottom: 24px;
-  width: 100%;
+.srn-alert {
+  .alert {
+    position: fixed;
+    width: 100%;
+    display: block;
+    bottom: -30px;
+    transition: 1s bottom ease;
+  }
+  &.display {
+    .alert {
+      bottom: 24px;
+      animation: bounceInUp 1s ease;
+    }
+  }
 }
 </style>

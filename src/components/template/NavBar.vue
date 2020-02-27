@@ -88,6 +88,9 @@ export default {
 <style lang="scss">
 #nav {
   .navbar {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
     background-color: #69c05b !important;
     padding: 10px;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
